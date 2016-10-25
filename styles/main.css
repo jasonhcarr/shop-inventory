@@ -1,0 +1,23 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  text-align: center;
+  background-color: currentColor; }
+  .main-container h1 {
+    font-size: 6em;
+    margin: 30px 0 0;
+    color: #A68989;
+    font-family: "Arial Black", Gadget, sans-serif; }
+  .main-container table {
+    width: 80%;
+    font-size: 2.5em;
+    margin: 1% 10%;
+    -webkit-text-stroke: 1px black;
+    font-family: Verdana, Geneva, sans-serif; }
+    .main-container table tbody tr:nth-child(even) {
+      background-color: #ccc; }
+    .main-container table tbody {
+      background-color: #ddd; }
+
+/*# sourceMappingURL=main.css.map */

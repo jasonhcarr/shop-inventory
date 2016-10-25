@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="inventory">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Shop Inventory</title>
+    <link rel="stylesheet" href="/styles/main.css" media="screen" title="no title">
+</head>
+
+<body>
+    <div class="main-container">
+
+        <header>
+            <h1>Shop Inventory</h1>
+        </header>
+        <main>
+            <table ng-controller="TableController as table">
+                <tr>
+                    <th>Name</th>
+                    <th>Price w/tax</th>
+                    <th>Quantity</th>
+                    <th>Color</th>
+                </tr>
+                <tr ng-repeat="item in table.items">
+                    <td>{{item.name}}</td>
+                    <td>${{table.adjustedPrice(item)}}
+                        <img src="{{table.saleTag(item)}}" >
+                    </td>
+                    <td>{{item.quantity}}</td>
+                    <td style="color: {{item.color}}">{{item.color}}</td>
+                </tr>
+            </table>
+        </main>
+        <footer>
+            <input id="region-select" type="button" name="region-select" value="Region">
+            <div class="selected-region">{{region}}</div>
+        </footer>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
