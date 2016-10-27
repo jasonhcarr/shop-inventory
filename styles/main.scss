@@ -6,10 +6,45 @@
     background-color: currentColor;
 
     h1 {
+      font-weight: lighter;
         font-size: 6em;
         margin: 30px 0 0;
         color: #A68989;
         font-family: "Arial Black", Gadget, sans-serif;
+    }
+
+    ul li {
+        list-style-type: none;
+        margin-left: 0;
+        padding-left: 0;
+        display: inline-block;
+
+        .input-field-prompts {
+            color: #A68989;
+            text-align: left;
+            margin: 0;
+            padding: 0;
+        }
+
+        .input-fields {
+            height: 25px;
+            width: 263px;
+            font-size: 1.5em;
+        }
+
+        .input-fieldsng.dirty.ng-invalid-required {
+          background-color: red;
+
+    }
+
+        input[type=submit] {
+            height: 50px;
+            width: 75px;
+            background-color: black;
+            border: 2px solid #A68989;
+            color: #A68989;
+            margin: 3px;
+        }
     }
 
     table {
@@ -25,6 +60,14 @@
 
         tbody {
             background-color: #ddd;
+        }
+
+        .manual-quantity-input {
+            font-size: 1em;
+            height: 40px;
+            width: 110px;
+            color: red;
+            text-align: center;
         }
     }
 }

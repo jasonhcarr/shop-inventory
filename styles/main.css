@@ -5,10 +5,34 @@
   text-align: center;
   background-color: currentColor; }
   .main-container h1 {
+    font-weight: lighter;
     font-size: 6em;
     margin: 30px 0 0;
     color: #A68989;
     font-family: "Arial Black", Gadget, sans-serif; }
+  .main-container ul li {
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
+    display: inline-block; }
+    .main-container ul li .input-field-prompts {
+      color: #A68989;
+      text-align: left;
+      margin: 0;
+      padding: 0; }
+    .main-container ul li .input-fields {
+      height: 25px;
+      width: 263px;
+      font-size: 1.5em; }
+    .main-container ul li .input-fieldsng.dirty.ng-invalid-required {
+      background-color: red; }
+    .main-container ul li input[type=submit] {
+      height: 50px;
+      width: 75px;
+      background-color: black;
+      border: 2px solid #A68989;
+      color: #A68989;
+      margin: 3px; }
   .main-container table {
     width: 80%;
     font-size: 2.5em;
@@ -19,5 +43,11 @@
       background-color: #ccc; }
     .main-container table tbody {
       background-color: #ddd; }
+    .main-container table .manual-quantity-input {
+      font-size: 1em;
+      height: 40px;
+      width: 110px;
+      color: red;
+      text-align: center; }
 
 /*# sourceMappingURL=main.css.map */

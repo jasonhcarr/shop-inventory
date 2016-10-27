@@ -10,24 +10,59 @@
 
 <body>
     <div class="main-container">
-
         <header>
             <h1>Shop Inventory</h1>
         </header>
         <main>
+            <div class="entry-form-container" ng-controller="FormController as form">
+                <form class="enter-inventory" name="enter-inventory" ng-submit="form.submit()">
+                    <ul>
+                        <li>
+                            <h3 class="input-field-prompts">Product Name:</h3>
+                            <input type="text" class="input-fields" required ng-minlength="1" ng-model="form.newItem.name">
+                        </li>
+                        <li>
+                            <h3 class="input-field-prompts">Product Price:</h3>
+                            <input type="number" class="input-fields" required min="0" ng-model="form.newItem.price">
+                        </li>
+                        <li>
+                            <h3 class="input-field-prompts">Product Quantity:</h3>
+                            <input type="number" class="input-fields" required min="0" ng-model="form.newItem.quantity">
+                        </li>
+                        <li>
+                            <h3 class="input-field-prompts">Product Color:</h3>
+                            <input type="text" class="input-fields" required ng-minlength="1" ng-model="form.newItem.color">
+                        </li>
+                        <li>
+                            <h3 class="input-field-prompts">Product Discount:</h3>
+                            <input type="number" class="input-fields" ng-model="form.newItem.discount">
+                        </li>
+                        <li><input type="submit" value="Add Item" ng-disabled="enter-inventory.$invalid"></li>
+                    </ul>
+                </form>
+            </div>
             <table ng-controller="TableController as table">
                 <tr>
-                    <th>Name</th>
-                    <th>Price w/tax</th>
-                    <th>Quantity</th>
-                    <th>Color</th>
+                    <th><a href="" ng-click="orderByField='name'; reverseSort = !reverseSort">Name</a></th>
+                    <th><a href="" ng-click="orderByField='adjustedPrice'; reverseSort = !reverseSort">Price w/tax</a></th>
+                    <th><a href="" ng-click="orderByField='quantity'; reverseSort = !reverseSort">Quantity</a></th>
+                    <th><a href="" ng-click="orderByField='color'; reverseSort = !reverseSort">Color</a></th>
                 </tr>
-                <tr ng-repeat="item in table.items">
-                    <td>{{item.name}}</td>
-                    <td>${{table.adjustedPrice(item)}}
-                        <img src="{{table.saleTag(item)}}" >
+                <tr ng-repeat="item in table.items | filter:item.name | orderBy:orderByField:reverseSort">
+                    <td data-id="{{item.id}}">{{item.name}}</td>
+                    <td>{{table.adjustedPrice(item) | currency}}
+                        <img src="{{table.saleTag(item)}}">
                     </td>
-                    <td>{{item.quantity}}</td>
+                    <td>
+                        {{item.quantity}}
+                        <!-- EPIC: unsolved; error returns "not valid number" -->
+                        <!-- <input class="manual-quantity-input"
+                        type="number"
+                        name="line-quantity"
+                        ng-change=""
+                        value="{{item.quantity}}"
+                        ng-model="item.quantity"> -->
+                    </td>
                     <td style="color: {{item.color}}">{{item.color}}</td>
                 </tr>
             </table>
@@ -39,6 +74,7 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/form.js"></script>
 </body>
 
 </html>
