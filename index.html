@@ -10,50 +10,57 @@
 
 <body>
     <div class="main-container">
-        <header>
+        <header ngcontroller="HeaderController">
             <h1>Shop Inventory</h1>
+            <form class="login" ng-submit="submitLogin(); form.$setPristine()" method="post">
+              <label for="login">Login</label>
+              <input ng-model="login.name" type="text" name="name" placeholder="User Name">
+              <input type="submit" value="Login">
+            </form>
+            <div class="logged-in" ng-model="logged.name">{{logged.name}}</div>
+            <div class="logged-in" ng-model="logged.time">{{logged.time | date:'MMM d - H:mm a'}}</div>
         </header>
-        <main>
-            <div class="entry-form-container" ng-controller="FormController as form">
-                <form class="enter-inventory" name="enter-inventory" ng-submit="form.submit()">
+        <main ng-controller="InventoryController">
+            <div class="entry-form-container">
+                <form class="enter-inventory" name="enter-inventory" ng-submit="submit(newItem)">
                     <ul>
                         <li>
                             <h3 class="input-field-prompts">Product Name:</h3>
-                            <input type="text" class="input-fields" required ng-minlength="1" ng-model="form.newItem.name">
+                            <input type="text" class="input-fields" ng-required="true" ng-minlength="1" ng-model="newItem.name">
                         </li>
                         <li>
                             <h3 class="input-field-prompts">Product Price:</h3>
-                            <input type="number" class="input-fields" required min="0" ng-model="form.newItem.price">
+                            <input type="number" class="input-fields" ng-required="true" required min="0" ng-model="newItem.price">
                         </li>
                         <li>
                             <h3 class="input-field-prompts">Product Quantity:</h3>
-                            <input type="number" class="input-fields" required min="0" ng-model="form.newItem.quantity">
+                            <input type="number" class="input-fields" ng-required="true"  min="0" ng-model="newItem.quantity">
                         </li>
                         <li>
                             <h3 class="input-field-prompts">Product Color:</h3>
-                            <input type="text" class="input-fields" required ng-minlength="1" ng-model="form.newItem.color">
+                            <input type="text" class="input-fields" ng-required="true"  ng-minlength="1" ng-model="newItem.color">
                         </li>
                         <li>
                             <h3 class="input-field-prompts">Product Discount:</h3>
-                            <input type="number" class="input-fields" ng-model="form.newItem.discount">
+                            <input type="number" class="input-fields" ng-model="newItem.discount">
                         </li>
                         <li><input type="submit" value="Add Item" ng-disabled="enter-inventory.$invalid"></li>
                     </ul>
                 </form>
             </div>
-            <table ng-controller="TableController as table">
+            <table>
                 <tr>
                     <th><a href="" ng-click="orderByField='name'; reverseSort = !reverseSort">Name</a></th>
                     <th><a href="" ng-click="orderByField='adjustedPrice'; reverseSort = !reverseSort">Price w/tax</a></th>
                     <th><a href="" ng-click="orderByField='quantity'; reverseSort = !reverseSort">Quantity</a></th>
                     <th><a href="" ng-click="orderByField='color'; reverseSort = !reverseSort">Color</a></th>
                 </tr>
-                <tr ng-repeat="item in table.items | filter:item.name | orderBy:orderByField:reverseSort">
-                    <td data-id="{{item.id}}">{{item.name}}</td>
-                    <td>{{table.adjustedPrice(item) | currency}}
-                        <img src="{{table.saleTag(item)}}">
+                <tr ng-repeat="item in allItems | filter: price | orderBy:orderByField">
+                    <td ng-model="item.name" data-id="{{item.id}}">{{item.name}}</td>
+                    <td>{{adjustedPrice(item) | currency}}
+                        <img src="{{saleTag(item)}}">
                     </td>
-                    <td>
+                    <td ng-model="item.quantity">
                         {{item.quantity}}
                         <!-- EPIC: unsolved; error returns "not valid number" -->
                         <!-- <input class="manual-quantity-input"
@@ -63,18 +70,22 @@
                         value="{{item.quantity}}"
                         ng-model="item.quantity"> -->
                     </td>
-                    <td style="color: {{item.color}}">{{item.color}}</td>
+                    <td ng-model="item.color" style="color: {{item.color}}">{{item.color}}</td>
                 </tr>
             </table>
         </main>
-        <footer>
+        <!-- <footer>
             <input id="region-select" type="button" name="region-select" value="Region">
             <div class="selected-region">{{region}}</div>
-        </footer>
+        </footer> -->
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/form.js"></script>
+    <script src="./node_modules/angular/angular.js"></script>
+    <script src="./node_modules/angular-local-storage/dist/angular-local-storage.min.js"></script>
+    <script src="./js/app.js"></script>
+    <script src="./js/controllers/inventory.controller.js"></script>
+    <script src="./js/controllers/header.controller.js"></script>
+    <script src="./js/services/inventory.service.js"></script>
+    <script src="./js/services/user.service.js"></script>
 </body>
 
 </html>
