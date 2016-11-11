@@ -3,7 +3,7 @@
   flex-direction: column;
   flex-wrap: wrap;
   text-align: center;
-  background-color: currentColor; }
+  background-color: beige; }
   .main-container h1 {
     font-weight: lighter;
     font-size: 6em;
@@ -24,8 +24,8 @@
       height: 25px;
       width: 263px;
       font-size: 1.5em; }
-    .main-container ul li .input-fieldsng.dirty.ng-invalid-required {
-      background-color: red; }
+      .main-container ul li .input-fields.ng-invalid-required {
+        border: 2px solid red; }
     .main-container ul li input[type=submit] {
       height: 50px;
       width: 75px;

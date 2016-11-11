@@ -3,10 +3,10 @@
     flex-direction: column;
     flex-wrap: wrap;
     text-align: center;
-    background-color: currentColor;
+    background-color: beige;
 
     h1 {
-      font-weight: lighter;
+        font-weight: lighter;
         font-size: 6em;
         margin: 30px 0 0;
         color: #A68989;
@@ -30,12 +30,11 @@
             height: 25px;
             width: 263px;
             font-size: 1.5em;
+
+     &.ng-invalid-required {
+                border: 2px solid red;
+            }
         }
-
-        .input-fieldsng.dirty.ng-invalid-required {
-          background-color: red;
-
-    }
 
         input[type=submit] {
             height: 50px;

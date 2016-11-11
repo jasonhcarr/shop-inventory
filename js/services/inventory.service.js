@@ -102,7 +102,6 @@ angular.module('inventory').service('InvService', function(localStorageService) 
 
     }
     this.store = function(newItem) {
-        console.log(newItem);
         var items = getInventory();
         items.push(newItem);
         setInventory(items);

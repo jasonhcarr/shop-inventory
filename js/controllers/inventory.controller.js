@@ -3,11 +3,13 @@ angular.module('inventory').controller('InventoryController', function($scope, I
     var salesTax = 0.0575;
     $scope.allItems = InvService.get();
     $scope.orderByField = 'price';
-    $scope.reverseSort = false;
+    // $scope.reverseSort = false;
 
     $scope.submit = function(item) {
+      item.id = Date.now();
         $scope.allItems.push(item);
         InvService.set($scope.allItems);
+        $scope.newItem = {};
     };
 
 

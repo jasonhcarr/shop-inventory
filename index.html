@@ -12,7 +12,7 @@
     <div class="main-container">
         <header ngcontroller="HeaderController">
             <h1>Shop Inventory</h1>
-            <form class="login" ng-submit="submitLogin(); form.$setPristine()" method="post">
+            <form class="login" ng-submit="submitLogin()" method="post">
               <label for="login">Login</label>
               <input ng-model="login.name" type="text" name="name" placeholder="User Name">
               <input type="submit" value="Login">
@@ -22,15 +22,15 @@
         </header>
         <main ng-controller="InventoryController">
             <div class="entry-form-container">
-                <form class="enter-inventory" name="enter-inventory" ng-submit="submit(newItem)">
+                <form class="enter-inventory" name="enter-inventory" ng-submit="submit(newItem); enter-inventory.$setPristine()">
                     <ul>
                         <li>
                             <h3 class="input-field-prompts">Product Name:</h3>
-                            <input type="text" class="input-fields" ng-required="true" ng-minlength="1" ng-model="newItem.name">
+                            <input type="text" class="input-fields" ng-required="true" ng-model="newItem.name">
                         </li>
                         <li>
                             <h3 class="input-field-prompts">Product Price:</h3>
-                            <input type="number" class="input-fields" ng-required="true" required min="0" ng-model="newItem.price">
+                            <input type="number" class="input-fields" ng-required="true" min="0" ng-model="newItem.price">
                         </li>
                         <li>
                             <h3 class="input-field-prompts">Product Quantity:</h3>
@@ -42,7 +42,7 @@
                         </li>
                         <li>
                             <h3 class="input-field-prompts">Product Discount:</h3>
-                            <input type="number" class="input-fields" ng-model="newItem.discount">
+                            <input type="number"  min="0" class="input-fields" ng-model="newItem.discount">
                         </li>
                         <li><input type="submit" value="Add Item" ng-disabled="enter-inventory.$invalid"></li>
                     </ul>
@@ -55,7 +55,7 @@
                     <th><a href="" ng-click="orderByField='quantity'; reverseSort = !reverseSort">Quantity</a></th>
                     <th><a href="" ng-click="orderByField='color'; reverseSort = !reverseSort">Color</a></th>
                 </tr>
-                <tr ng-repeat="item in allItems | filter: price | orderBy:orderByField">
+                <tr ng-repeat="item in allItems | orderBy:orderByField:reverseSort">
                     <td ng-model="item.name" data-id="{{item.id}}">{{item.name}}</td>
                     <td>{{adjustedPrice(item) | currency}}
                         <img src="{{saleTag(item)}}">
