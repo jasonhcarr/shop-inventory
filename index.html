@@ -10,19 +10,19 @@
 
 <body>
     <div class="main-container">
-        <header ngcontroller="HeaderController">
+        <header ng-controller="HeaderController as header">
             <h1>Shop Inventory</h1>
-            <form class="login" ng-submit="submitLogin()" method="post">
+            <form class="login" ng-submit="submitLogin(login)" method="post">
               <label for="login">Login</label>
-              <input ng-model="login.name" type="text" name="name" placeholder="User Name">
+              <input ng-model="login.name" type="text" placeholder="User Name" value="login.name">
               <input type="submit" value="Login">
             </form>
             <div class="logged-in" ng-model="logged.name">{{logged.name}}</div>
-            <div class="logged-in" ng-model="logged.time">{{logged.time | date:'MMM d - H:mm a'}}</div>
+            <div class="logged-in" ng-model="logged.time">{{logged.time | date:'MMM d - h:mm a'}}</div>
         </header>
         <main ng-controller="InventoryController">
             <div class="entry-form-container">
-                <form class="enter-inventory" name="enter-inventory" ng-submit="submit(newItem); enter-inventory.$setPristine()">
+                <form class="enter-inventory" name="enterInventory" ng-submit="submit(newItem)">
                     <ul>
                         <li>
                             <h3 class="input-field-prompts">Product Name:</h3>
@@ -60,24 +60,15 @@
                     <td>{{adjustedPrice(item) | currency}}
                         <img src="{{saleTag(item)}}">
                     </td>
-                    <td ng-model="item.quantity">
-                        {{item.quantity}}
-                        <!-- EPIC: unsolved; error returns "not valid number" -->
-                        <!-- <input class="manual-quantity-input"
+                    <td>
+                        <input class="manual-quantity-input"
                         type="number"
-                        name="line-quantity"
-                        ng-change=""
-                        value="{{item.quantity}}"
-                        ng-model="item.quantity"> -->
+                        name="line-quantity" ng-model="item.quantity" ng-change="updateQty(item)">
                     </td>
                     <td ng-model="item.color" style="color: {{item.color}}">{{item.color}}</td>
                 </tr>
             </table>
         </main>
-        <!-- <footer>
-            <input id="region-select" type="button" name="region-select" value="Region">
-            <div class="selected-region">{{region}}</div>
-        </footer> -->
     </div>
     <script src="./node_modules/angular/angular.js"></script>
     <script src="./node_modules/angular-local-storage/dist/angular-local-storage.min.js"></script>

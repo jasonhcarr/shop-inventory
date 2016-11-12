@@ -1,9 +1,7 @@
 angular.module('inventory').controller('InventoryController', function($scope, InvService) {
-
     var salesTax = 0.0575;
     $scope.allItems = InvService.get();
-    $scope.orderByField = 'price';
-    // $scope.reverseSort = false;
+    $scope.orderByField = 'adjustedPrice';
 
     $scope.submit = function(item) {
       item.id = Date.now();
@@ -11,8 +9,6 @@ angular.module('inventory').controller('InventoryController', function($scope, I
         InvService.set($scope.allItems);
         $scope.newItem = {};
     };
-
-
 
     $scope.adjustedPrice = function(item) {
         item.adjustedPrice = null;
@@ -29,5 +25,9 @@ angular.module('inventory').controller('InventoryController', function($scope, I
         if (item.discount > 0) {
             return './images/sale-tag.png';
         }
+    };
+
+    $scope.updateQty = function (item) {
+        InvService.update(item);
     };
 });
